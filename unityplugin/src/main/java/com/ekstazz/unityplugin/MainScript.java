@@ -190,8 +190,16 @@ public class MainScript extends Fragment
 
     public void StopListening()
     {
-        sr.destroy();
-        sr = null;
+        unityActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (sr != null)
+                {
+                    sr.destroy();
+                    sr = null;
+                }
+            }
+        });
     }
 
     public void RestartListening()
